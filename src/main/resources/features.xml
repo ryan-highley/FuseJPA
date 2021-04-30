@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="fuse-jpa-repo">
+
+    <feature name="fuse-jpa" version="${project.version}">
+        <feature>jdbc-driver-postgresql</feature>
+        <feature>jpa</feature>
+        <feature>jndi</feature>
+        <feature version="${feature.camel.version}">camel-blueprint</feature>
+        <feature version="${feature.camel.version}">camel-jpa</feature>
+        <feature>hibernate</feature>
+        <feature>hibernate-envers</feature>
+        <feature>hibernate-validator</feature>
+        <feature version="${feature.transaction.version}">transaction</feature>
+        <feature version="${feature.connector.version}">connector</feature>
+
+        <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
+        
+        <configfile finalname="etc/rtdyj.fuse.jpa.testbed.cfg">mvn:${project.groupId}/${project.artifactId}/${project.version}/properties/configuration</configfile>
+    </feature>
+
+    <feature name="jdbc-driver-postgresql" version="${project.version}">
+        <bundle>wrap:mvn:org.postgresql/postgresql/${jdbc.postgresql.version}</bundle>
+
+        <!-- should be part of "transaction/3.1.1" feature -->
+        <bundle>mvn:org.apache.aries.transaction/org.apache.aries.transaction.jdbc/${aries.transaction.jdbc.version}</bundle>
+        <bundle>mvn:org.apache.commons/commons-pool2/${commons.pool2.version}</bundle>
+        <bundle>mvn:org.apache.commons/commons-dbcp2/${commons.dbcp2.version}</bundle>
+    </feature>
+
+</features>
